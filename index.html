@@ -46,10 +46,13 @@
     </script>
     <script>
         const nextStation = ()=>{
-            fetch('nextStation').then(it=>{document.getElementById('info').intterHTML = it});
+            fetch('nextStation').
+                then(it=>{document.getElementById('info').intterHTML = it}).
+                catch(it=>alert(it));
         }
         const halt = ()=>{
-            fetch('halt');
+            fetch('halt').
+                catch(it=>alert(it));
         }
     </script>
 </body>
