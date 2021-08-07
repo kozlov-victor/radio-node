@@ -36,7 +36,7 @@
     </style>
 </head>
 <body>
-    <div id="info">UR-1</div>
+    <div id="info">...</div>
     <button class="normal" onclick="nextStation()">next</button>
     <button class="error" onclick="halt()">stop</button>
     <script>
@@ -45,6 +45,16 @@
         }
     </script>
     <script>
+
+        const currentStation = ()=>{
+            fetch('currentStation').
+            then(it=>it.text()).
+            then(it=>{
+                document.getElementById('info').innerHTML = it;
+            });
+        };
+        currentStation();
+
         const nextStation = ()=>{
             fetch('nextStation').
                 then(it=>it.text()).

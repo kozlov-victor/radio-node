@@ -97,6 +97,10 @@ const requestHandler = async (request, response) => {
             file.pipe(response);
             break;
         }
+        case '/currentStation': {
+            response.end(stations[currentStationIndex].name);
+            break;
+        }
         case '/nextStation': {
 			nextStation();
             response.end(stations[currentStationIndex].name);
