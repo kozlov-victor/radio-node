@@ -23,11 +23,11 @@ const PATH =
 
 let halted = false;
 const halt = ()=>{
-    halted = true;
     if (halted) return;
     const { spawn } = require('child_process');
     const child = spawn('sudo', ['halt']);
     console.log('halted');
+    halted = true;
 };
 
 const log = (msg)=>{
@@ -61,6 +61,9 @@ let player;
 
 const runPlayer = ()=>{
     console.log(stations[currentStationIndex].url);
+    if (player) {
+        player.quit();
+    }
     const Omx = require('node-omxplayer',undefined,true,10);
     player = Omx(stations[currentStationIndex].url);
     player.volUp();
@@ -85,7 +88,7 @@ const runPlayer = ()=>{
 const nextStation = ()=>{
     currentStationIndex++;
     currentStationIndex = currentStationIndex%stations.length;
-    if (player) player.newSource(stations[currentStationIndex].url, undefined,true,10);
+    if (player) runPlayer();
 }
 
 
