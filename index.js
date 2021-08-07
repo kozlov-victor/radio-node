@@ -1,7 +1,7 @@
 const http = require('http');
 const fs = require('fs');
 
-const window = true;
+const window = false;
 
 if (!window) {
     const Gpio = require('onoff').Gpio;
