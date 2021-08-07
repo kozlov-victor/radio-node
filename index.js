@@ -88,7 +88,7 @@ const runPlayer = ()=>{
 const nextStation = ()=>{
     currentStationIndex++;
     currentStationIndex = currentStationIndex%stations.length;
-    if (player) runPlayer();
+    runPlayer();
 }
 
 
