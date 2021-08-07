@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <style>
+        * {
+            cursor: none;
+        }
+        .normal {
+            background-color: #1ea416;
+        }
+        .error {
+            background-color: #a20d0d;
+        }
+        button {
+            border: none;
+            color: white;
+            display: block;
+            width: 100%;
+            margin: 40px auto;
+            padding: 30px;
+            text-align: center;
+        }
+        button:active {
+            border: 1px solid #bf7e2d;
+        }
+        #info {
+            display: block;
+            text-align: center;
+            padding: 20px;
+            font-family: monospace;
+            font-size: 3em;
+        }
+    </style>
+</head>
+<body>
+    <div id="info">UR-1</div>
+    <button class="normal" onclick="nextStation()">next</button>
+    <button class="error" onclick="nextStation()">stop</button>
+    <script>
+        window.onerror = function(e){
+            alert(e);
+        }
+    </script>
+    <script>
+        const nextStation = ()=>{
+            fetch('nextStation').then(it=>{document.getElementById('info').intterHTML = it});
+        }
+        const halt = ()=>{
+            fetch('halt');
+        }
+    </script>
+</body>
+</html>
