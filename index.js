@@ -12,7 +12,7 @@ button.watch((err, value) => {
     }
 });
 
-const PATH = '/home/pi/radio-node/'
+const PATH = '/home/pi/radio-node/';
 
 let halted = false;
 const halt = ()=>{
@@ -25,7 +25,7 @@ const halt = ()=>{
 
 const log = (msg)=>{
     console.log(msg);
-    fs.writeFileSync('log.txt',msg,'utf8');
+    fs.writeFileSync(`${PATH}log.txt`,msg,'utf8');
 };
 
 const stations = [
