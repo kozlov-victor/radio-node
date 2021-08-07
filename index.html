@@ -48,7 +48,7 @@
         const nextStation = ()=>{
             fetch('nextStation').
                 then(it=>it.text()).
-                then(it=>{document.getElementById('info').intterHTML = it}).
+                then(it=>document.getElementById('info').intterHTML = it).
                 catch(it=>alert(it));
         }
         const halt = ()=>{
