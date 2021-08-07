@@ -85,7 +85,8 @@ const port = 3000;
 const requestHandler = async (request, response) => {
 	switch (request.url) {
         case '/index.html' : {
-            file.pipe(fs.createReadStream(`${PATH}/index.html`));
+            const file = fs.createReadStream(`${PATH}index.html`);
+            file.pipe(response);
             break;
         }
         case '/nextStation': {
@@ -104,7 +105,7 @@ const requestHandler = async (request, response) => {
 const server = http.createServer(requestHandler);
 server.listen(port, (err) => {
     if (err) {
-        return log('something bad happened', err)
+        return log('something bad happened', err);
     } else {
         runPlayer();
     }
