@@ -1,18 +1,25 @@
 const http = require('http');
 const fs = require('fs');
 
-const Gpio = require('onoff').Gpio;
+const window = true;
 
-const button = new Gpio(4, 'in', 'both');
+if (!window) {
+    const Gpio = require('onoff').Gpio;
 
-button.watch((err, value) => {
-    if (err) console.log(err);
-    if (value===0) {
-        halt();
-    }
-});
+    const button = new Gpio(4, 'in', 'both');
 
-const PATH = '/home/pi/radio-node/';
+    button.watch((err, value) => {
+        if (err) console.log(err);
+        if (value===0) {
+            halt();
+        }
+    });
+}
+
+
+
+const PATH =
+    window?'':'/home/pi/radio-node/';
 
 let halted = false;
 const halt = ()=>{
@@ -96,7 +103,9 @@ const requestHandler = async (request, response) => {
             break;
 		}
         case '/halt': {
-            halt();
+            setTimeout(()=>{
+                halt();
+            },1);
             break;
         }
 		default:
@@ -108,7 +117,7 @@ server.listen(port, (err) => {
     if (err) {
         return log('something bad happened', err);
     } else {
-        runPlayer();
+        if (!window) runPlayer();
     }
     log(`server is listening on ${port}`);
 });
