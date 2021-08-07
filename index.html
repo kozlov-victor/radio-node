@@ -47,11 +47,13 @@
     <script>
         const nextStation = ()=>{
             fetch('nextStation').
+                then(it=>it.text()).
                 then(it=>{document.getElementById('info').intterHTML = it}).
                 catch(it=>alert(it));
         }
         const halt = ()=>{
             fetch('halt').
+                then(it=>it.text()).
                 catch(it=>alert(it));
         }
     </script>
