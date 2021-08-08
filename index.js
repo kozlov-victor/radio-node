@@ -86,6 +86,7 @@ const nextStation = ()=>{
     currentStationIndex++;
     currentStationIndex = currentStationIndex%stations.length;
     if (player) {
+        player.pause();
         player.newSource(stations[currentStationIndex].url, undefined,true,10);
     }
 }
