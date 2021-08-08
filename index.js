@@ -59,36 +59,43 @@ let currentStationIndex = 0;
 
 let player;
 
+const onError = (e)=>{
+    log(e);
+    log('next running scheduled');
+    setTimeout(()=>{
+        runPlayer();
+    },1000);
+};
+
+const onClose = (e)=>{
+    log('closed');
+    log(e);
+    log('next running scheduled');
+    setTimeout(()=>{
+        runPlayer();
+    },5000);
+};
+
 const runPlayer = ()=>{
-    console.log(stations[currentStationIndex].url);
+    if (player) {
+        player.removeListener('error',onError);
+        player.removeListener('close',onClose);
+        player.quit();
+    }
+
     const Omx = require('node-omxplayer',undefined,true,10);
     player = Omx(stations[currentStationIndex].url);
     player.volUp();
     log('player is running');
-    player.on('error',(e)=>{
-        log(e);
-        log('next running scheduled');
-        setTimeout(()=>{
-            runPlayer();
-        },1000);
-    });
-    player.on('close',(e)=>{
-        log('closed');
-        log(e);
-        log('next running scheduled');
-        setTimeout(()=>{
-            runPlayer();
-        },5000);
-    });
+    player.on('error',onError);
+    player.on('close',onClose);
 }
 
 const nextStation = ()=>{
     currentStationIndex++;
     currentStationIndex = currentStationIndex%stations.length;
     if (player) {
-        player.pause();
-        player.newSource(stations[currentStationIndex].url, undefined,true,10);
-        player.play();
+        runPlayer();
     }
 }
 
