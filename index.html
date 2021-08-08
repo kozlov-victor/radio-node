@@ -46,23 +46,76 @@
     </script>
     <script>
 
+        class Player {
+            constructor(stations) {
+                this.stations = stations;
+                this._audio = new Audio();
+                this._currentStationIndex = 0;
+            }
+            play(){
+                this._audio.src = this.stations[this._currentStationIndex].url;
+                this._audio.play();
+                const self = this;
+                this._audio.onerror = (e)=>{
+                    console.log('scheduled next play');
+                    setTimeout(()=>{
+                        self.play();
+                    },5000);
+                }
+            }
+            nextStation() {
+                this._audio.src = null;
+                this._currentStationIndex++;
+                this._currentStationIndex = this._currentStationIndex % this.stations.length;
+                this.play();
+            }
+            currentStation(){
+                return this.stations[this._currentStationIndex].name;
+            }
+        }
+
+        const player = new Player(
+            [
+                {
+                    name: 'UR-1',
+                    url: 'http://91.218.213.49:8000/ur1-mp3'
+                },
+                {
+                    name: 'NV',
+                    url: 'https://online-radio.nv.ua/radionv.mp3'
+                },
+                {
+                    name: 'JAM',
+                    url: 'https://cast.radiogroup.com.ua/jamfm'
+                },
+                {
+                    name: 'Krajina',
+                    url: 'http://live.radioec.com.ua:8000/kiev'
+                }
+            ]
+        );
+        player.play();
+
         const currentStation = ()=>{
-            fetch('currentStation').
-            then(it=>it.text()).
-            then(it=>{
-                document.getElementById('info').innerHTML = it;
-            });
+            // fetch('currentStation').
+            // then(it=>it.text()).
+            // then(it=>{
+            //     document.getElementById('info').innerHTML = it;
+            // });
+            document.getElementById('info').innerHTML = player.currentStation();
         };
         currentStation();
 
         const nextStation = ()=>{
-            fetch('nextStation').
-                then(it=>it.text()).
-                then(it=>{
-                    console.log(it);
-                    document.getElementById('info').innerHTML = it;
-                }).
-                catch(it=>alert(it));
+            // fetch('nextStation').
+            //     then(it=>it.text()).
+            //     then(it=>{
+            //         console.log(it);
+            //         document.getElementById('info').innerHTML = it;
+            //     }).
+            //     catch(it=>alert(it));
+            player.nextStation();
+            document.getElementById('info').innerHTML = player.currentStation();
         }
         const halt = ()=>{
             fetch('halt').

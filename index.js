@@ -124,7 +124,9 @@ server.listen(port, (err) => {
     if (err) {
         return log('something bad happened', err);
     } else {
-        if (!window) runPlayer();
+        if (!window) {
+            //runPlayer();
+        }
     }
     log(`server is listening on ${port}`);
 });
