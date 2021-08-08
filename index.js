@@ -67,7 +67,7 @@ const runPlayer = ()=>{
     log('player is running');
     player.on('error',(e)=>{
         log(e);
-        log('error, next running scheduled');
+        log('next running scheduled');
         setTimeout(()=>{
             runPlayer();
         },1000);
@@ -75,7 +75,7 @@ const runPlayer = ()=>{
     player.on('close',(e)=>{
         log('closed');
         log(e);
-        log('closed, next running scheduled');
+        log('next running scheduled');
         setTimeout(()=>{
             runPlayer();
         },5000);
@@ -83,7 +83,6 @@ const runPlayer = ()=>{
 }
 
 const nextStation = ()=>{
-    if (!player.running) return;
     currentStationIndex++;
     currentStationIndex = currentStationIndex%stations.length;
     if (player) {
@@ -124,9 +123,7 @@ server.listen(port, (err) => {
     if (err) {
         return log('something bad happened', err);
     } else {
-        if (!window) {
-            //runPlayer();
-        }
+        if (!window) runPlayer();
     }
     log(`server is listening on ${port}`);
 });
