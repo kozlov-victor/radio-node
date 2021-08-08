@@ -67,7 +67,7 @@ const runPlayer = ()=>{
     log('player is running');
     player.on('error',(e)=>{
         log(e);
-        log('next running scheduled');
+        log('error, next running scheduled');
         setTimeout(()=>{
             runPlayer();
         },1000);
@@ -75,7 +75,7 @@ const runPlayer = ()=>{
     player.on('close',(e)=>{
         log('closed');
         log(e);
-        log('next running scheduled');
+        log('closed, next running scheduled');
         setTimeout(()=>{
             runPlayer();
         },5000);
