@@ -74,7 +74,6 @@ const runPlayer = ()=>{
     });
     player.on('close',(e)=>{
         log('closed');
-        log(e);
         log('closed, next running scheduled');
         setTimeout(()=>{
             runPlayer();
@@ -91,6 +90,9 @@ const nextStation = ()=>{
     }
 }
 
+setInterval(()=>{
+    log(player.running);
+},1000);
 
 const port = 3000;
 const requestHandler = async (request, response) => {
