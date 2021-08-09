@@ -61,6 +61,7 @@ let currentStationIndex = 0;
 let player;
 let tidError;
 let tidClose;
+let id = 0;
 
 const onError = (e)=>{
     log(e);
@@ -71,10 +72,10 @@ const onError = (e)=>{
 }
 
 const onClose = (e)=>{
-    log('closed: next running scheduled');
+    log('closed: next running scheduled for player ' + player.id);
     tidClose = setTimeout(()=>{
         runPlayer();
-    },1000);
+    },2000);
 }
 
 const runPlayer = ()=>{
@@ -84,6 +85,7 @@ const runPlayer = ()=>{
     log('player is running');
     player.on('error',onError);
     player.on('close',onClose);
+    player.id = id++;
 }
 
 const nextStation = ()=>{
