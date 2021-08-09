@@ -82,16 +82,14 @@ const runPlayer = ()=>{
             log('next running cancelled');
             return;
         }
-        player.removeListener('error',onError);
-        player.removeListener('close',onClosed);
         log('listener removed');
     }
     const Omx = require('node-omxplayer',undefined,true,10);
     player = Omx(stations[currentStationIndex].url);
     player.volUp();
     log('player is running');
-    player.on('error',onError);
-    player.on('close',onClosed);
+    player.once('error',onError);
+    player.once('close',onClosed);
 }
 
 const nextStation = ()=>{
