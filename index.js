@@ -77,7 +77,7 @@ const runPlayer = ()=>{
         log(e);
         log('closed, next running scheduled');
         setTimeout(()=>{
-            if (!player.running) player.newSource(stations[currentStationIndex].url, undefined,true,10);
+            runPlayer();
         },5000);
     });
 }
