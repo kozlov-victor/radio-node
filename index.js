@@ -75,7 +75,6 @@ const runPlayer = (url)=>{
         log('closed: next running scheduled');
         setTimeout(()=>{
             if (url!==stations[currentStationIndex].url) return;
-            player.quit();
             runPlayer(url);
         },5000);
     });
