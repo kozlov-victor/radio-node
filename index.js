@@ -3,10 +3,8 @@ const fs = require('fs');
 
 const window = false;
 
-let Omx = undefined;
 if (!window) {
 
-    Omx = require('node-omxplayer',undefined,true,10);
     const Gpio = require('onoff').Gpio;
 
     const button = new Gpio(4, 'in', 'both');
@@ -63,6 +61,7 @@ let currentStationIndex = 0;
 let player;
 
 const runPlayer = (url)=>{
+    const Omx = require('node-omxplayer',undefined,true,10);
     player = Omx(url);
     player.volUp();
     log('player is running');
