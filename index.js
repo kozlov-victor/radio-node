@@ -3,7 +3,10 @@ const fs = require('fs');
 
 const window = false;
 
+let Omx = undefined;
 if (!window) {
+
+    Omx = require('node-omxplayer',undefined,true,10);
     const Gpio = require('onoff').Gpio;
 
     const button = new Gpio(4, 'in', 'both');
@@ -60,7 +63,6 @@ let currentStationIndex = 0;
 let player;
 
 const runPlayer = (url)=>{
-    const Omx = require('node-omxplayer',undefined,true,10);
     player = Omx(url);
     player.volUp();
     log('player is running');
@@ -74,8 +76,6 @@ const runPlayer = (url)=>{
     player.on('close',(e)=>{
         log('closed: next running scheduled');
         setTimeout(()=>{
-            if (url!==stations[currentStationIndex].url) return;
-            if (player.running) return;
             runPlayer(url);
         },5000);
     });
@@ -85,7 +85,8 @@ const nextStation = ()=>{
     currentStationIndex++;
     currentStationIndex = currentStationIndex%stations.length;
     if (player) {
-        player.newSource(stations[currentStationIndex].url, undefined,true,10);
+        player.quit();
+        runPlayer(stations[currentStationIndex].url);
     }
 }
 
