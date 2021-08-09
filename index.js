@@ -78,9 +78,13 @@ const onClosed = e=>{
 
 const runPlayer = ()=>{
     if (player) {
-        if (player.running) return;
+        if (player.running) {
+            log('next running cancelled');
+            return;
+        }
         player.removeListener('error',onError);
         player.removeListener('close',onClosed);
+        log('listener removed');
     }
     const Omx = require('node-omxplayer',undefined,true,10);
     player = Omx(stations[currentStationIndex].url);
