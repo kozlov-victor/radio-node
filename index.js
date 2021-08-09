@@ -91,16 +91,13 @@ const nextStation = ()=>{
     if (player) {
         player.removeListener('error',onError);
         player.removeListener('close',onClose);
-        try {
-            player.quit();
-        } catch (e) {
-            console.log(e);
-        }
+        console.log(player.running);
+        player.quit();
         clearTimeout(tidClose);
         clearTimeout(tidError);
-        runPlayer();
         currentStationIndex++;
         currentStationIndex = currentStationIndex%stations.length;
+        runPlayer();
     }
 }
 
