@@ -74,7 +74,7 @@ const onClose = (e)=>{
     log('closed: next running scheduled');
     tidClose = setTimeout(()=>{
         runPlayer();
-    },5000);
+    },1000);
 }
 
 const Omx = require('node-omxplayer',undefined,true,10);
