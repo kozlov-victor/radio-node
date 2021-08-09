@@ -15,6 +15,7 @@
             background-color: #a20d0d;
         }
         button {
+            position: relative;
             border: none;
             color: white;
             display: block;
@@ -24,7 +25,10 @@
             text-align: center;
         }
         button:active {
-            border: 1px solid #bf7e2d;
+            top: 4px;
+        }
+        button:disabled {
+            opacity: 0.5;
         }
         #info {
             display: block;
@@ -37,7 +41,7 @@
 </head>
 <body>
     <div id="info">...</div>
-    <button class="normal" onclick="nextStation()">next</button>
+    <button class="normal" id="nextStationBtn" onclick="nextStation()">next</button>
     <button class="error" onclick="halt()">stop</button>
     <script>
         window.onerror = function(e){
@@ -56,6 +60,11 @@
         currentStation();
         
         const nextStation = ()=>{
+            const nextStationBtn = document.getElementById('nextStationBtn');
+            nextStationBtn.setAttribute('disabled','disabled');
+            setTimeout(()=>{
+                nextStationBtn.removeAttribute('disabled');
+            },6000);
             fetch('nextStation').
                 then(it=>it.text()).
                 then(it=>{
