@@ -66,20 +66,20 @@ const onError = (e)=>{
     log(e);
     log('error: next running scheduled');
     tidError = setTimeout(()=>{
-        runPlayer(url);
+        runPlayer();
     },1000);
 }
 
 const onClose = (e)=>{
     log('closed: next running scheduled');
     tidClose = setTimeout(()=>{
-        runPlayer(url);
+        runPlayer();
     },5000);
 }
 
-const runPlayer = (url)=>{
+const runPlayer = ()=>{
     const Omx = require('node-omxplayer',undefined,true,10);
-    player = Omx(url);
+    player = Omx(stations[currentStationIndex].url);
     player.volUp();
     log('player is running');
     player.on('error',onError);
@@ -95,7 +95,7 @@ const nextStation = ()=>{
         player.quit();
         clearTimeout(tidClose);
         clearTimeout(tidError);
-        runPlayer(stations[currentStationIndex].url);
+        runPlayer();
     }
 }
 
