@@ -4,7 +4,6 @@ const fs = require('fs');
 const window = false;
 
 if (!window) {
-
     const Gpio = require('onoff').Gpio;
 
     const button = new Gpio(4, 'in', 'both');
@@ -59,46 +58,36 @@ let currentStationIndex = 0;
 
 
 let player;
-let tidError;
-let tidClose;
-let id = 0;
-
-const onError = (e)=>{
-    log(e);
-    log('error: next running scheduled');
-    tidError = setTimeout(()=>{
-        runPlayer();
-    },1000);
-}
-
-const onClose = (e)=>{
-    log('closed: next running scheduled for player ' + player.id);
-    tidClose = setTimeout(()=>{
-        runPlayer();
-    },2000);
-}
 
 const runPlayer = ()=>{
+    console.log(stations[currentStationIndex].url);
     const Omx = require('node-omxplayer',undefined,true,10);
     player = Omx(stations[currentStationIndex].url);
     player.volUp();
     log('player is running');
-    player.on('error',onError);
-    player.on('close',onClose);
-    player.id = id++;
+    player.on('error',(e)=>{
+        log(e);
+        log('error, next running scheduled');
+        setTimeout(()=>{
+            runPlayer();
+        },1000);
+    });
+    player.on('close',(e)=>{
+        log('closed');
+        log(e);
+        log('closed, next running scheduled');
+        setTimeout(()=>{
+            player.newSource(stations[currentStationIndex].url, undefined,true,10);
+        },5000);
+    });
 }
 
 const nextStation = ()=>{
+    if (!player.running) return;
+    currentStationIndex++;
+    currentStationIndex = currentStationIndex%stations.length;
     if (player) {
-        player.removeListener('error',onError);
-        player.removeListener('close',onClose);
-        log('running>>' + player.running);
-        if (player.running) player.quit();
-        clearTimeout(tidClose);
-        clearTimeout(tidError);
-        currentStationIndex++;
-        currentStationIndex = currentStationIndex%stations.length;
-        runPlayer();
+        player.newSource(stations[currentStationIndex].url, undefined,true,10);
     }
 }
 
@@ -135,7 +124,7 @@ server.listen(port, (err) => {
     if (err) {
         return log('something bad happened', err);
     } else {
-        if (!window) runPlayer(stations[currentStationIndex].url);
+        if (!window) runPlayer();
     }
     log(`server is listening on ${port}`);
 });
