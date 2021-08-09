@@ -87,15 +87,14 @@ const runPlayer = ()=>{
 }
 
 const nextStation = ()=>{
-    currentStationIndex++;
-    currentStationIndex = currentStationIndex%stations.length;
     if (player) {
         player.removeListener('error',onError);
         player.removeListener('close',onClose);
-        player.quit();
         clearTimeout(tidClose);
         clearTimeout(tidError);
         runPlayer();
+        currentStationIndex++;
+        currentStationIndex = currentStationIndex%stations.length;
     }
 }
 
