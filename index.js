@@ -60,7 +60,7 @@ let currentStationIndex = 0;
 let player;
 
 const runPlayer = ()=>{
-    console.log(stations[currentStationIndex].url);
+    if (player && player.running) return;
     const Omx = require('node-omxplayer',undefined,true,10);
     player = Omx(stations[currentStationIndex].url);
     player.volUp();
@@ -89,10 +89,6 @@ const nextStation = ()=>{
         player.newSource(stations[currentStationIndex].url, undefined,true,10);
     }
 }
-
-setInterval(()=>{
-    log(player.running);
-},1000);
 
 const port = 3000;
 const requestHandler = async (request, response) => {
