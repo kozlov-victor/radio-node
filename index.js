@@ -66,17 +66,16 @@ const runPlayer = (url)=>{
     log('player is running');
     player.on('error',(e)=>{
         log(e);
-        log('next running scheduled');
+        log('error: next running scheduled');
         setTimeout(()=>{
             runPlayer(url);
         },1000);
     });
     player.on('close',(e)=>{
-        log('closed');
-        log(e);
-        log('next running scheduled');
+        log('closed: next running scheduled');
         setTimeout(()=>{
             if (url!==stations[currentStationIndex].url) return;
+            player.quit();
             runPlayer(url);
         },5000);
     });
