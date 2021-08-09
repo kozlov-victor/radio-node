@@ -59,17 +59,16 @@ let currentStationIndex = 0;
 
 let player;
 
-const runPlayer = ()=>{
-    console.log(stations[currentStationIndex].url);
+const runPlayer = (url)=>{
     const Omx = require('node-omxplayer',undefined,true,10);
-    player = Omx(stations[currentStationIndex].url);
+    player = Omx(url);
     player.volUp();
     log('player is running');
     player.on('error',(e)=>{
         log(e);
         log('next running scheduled');
         setTimeout(()=>{
-            runPlayer();
+            runPlayer(url);
         },1000);
     });
     player.on('close',(e)=>{
@@ -77,7 +76,8 @@ const runPlayer = ()=>{
         log(e);
         log('next running scheduled');
         setTimeout(()=>{
-            runPlayer();
+            if (url!==stations[currentStationIndex].url) return;
+            runPlayer(url);
         },5000);
     });
 }
@@ -123,7 +123,7 @@ server.listen(port, (err) => {
     if (err) {
         return log('something bad happened', err);
     } else {
-        if (!window) runPlayer();
+        if (!window) runPlayer(stations[currentStationIndex].url);
     }
     log(`server is listening on ${port}`);
 });
