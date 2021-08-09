@@ -77,9 +77,8 @@ const onClose = (e)=>{
     },1000);
 }
 
-const Omx = require('node-omxplayer',undefined,true,10);
-
 const runPlayer = ()=>{
+    const Omx = require('node-omxplayer',undefined,true,10);
     player = Omx(stations[currentStationIndex].url);
     player.volUp();
     log('player is running');
@@ -92,7 +91,7 @@ const nextStation = ()=>{
         player.removeListener('error',onError);
         player.removeListener('close',onClose);
         log('running>>' + player.running);
-        player.quit();
+        if (player.running) player.quit();
         clearTimeout(tidClose);
         clearTimeout(tidError);
         currentStationIndex++;
