@@ -91,7 +91,11 @@ const nextStation = ()=>{
     if (player) {
         player.removeListener('error',onError);
         player.removeListener('close',onClose);
-        player.quit();
+        try {
+            player.quit();
+        } catch (e) {
+            console.log(e);
+        }
         clearTimeout(tidClose);
         clearTimeout(tidError);
         runPlayer();
