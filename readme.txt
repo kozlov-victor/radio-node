@@ -140,7 +140,7 @@ chromium-browser --kiosk http://localhost:3000/index.html
 
 
 sudo nano /etc/xdg/lxsession/LXDE-pi/autostart
-chromium-browser --kiosk http://localhost:3000/index.html
+chromium-browser --disable-features=AudioServiceOutOfProcess --kiosk http://localhost:3000/index.html
 
 
 

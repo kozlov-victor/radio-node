@@ -38,7 +38,7 @@
 <body>
     <div id="info">...</div>
     <button class="normal" onclick="nextStation()">next</button>
-<!--    <button class="error" onclick="halt()">stop</button>-->
+    <button class="error" onclick="halt()">stop</button>
     <script>
         window.onerror = function(e){
             alert(e);
@@ -70,15 +70,5 @@
                 catch(it=>alert(it));
         }
     </script>
-
-    <script>
-        const audio = new Audio('https://online-radio.nv.ua/radionv.mp3');
-        audio.style.display = 'none';
-        document.body.append(audio);
-        audio.play();
-    </script>
-
-    <button onclick="location.reload()">reload</button>
-
 </body>
 </html>
