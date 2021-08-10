@@ -136,7 +136,7 @@ crontab -e
 http://www.lcdwiki.com/3.5inch_RPi_Display
 
 nano /home/pi/.config/lxsession/LXDE-pi/autostart
-chromium-browser --kiosk http://localhost:3000/index.html
+chromium-browser --disable-features=AudioServiceOutOfProcess --kiosk http://localhost:3000/index.html
 
 
 sudo nano /etc/xdg/lxsession/LXDE-pi/autostart
