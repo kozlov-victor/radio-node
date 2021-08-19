@@ -41,6 +41,10 @@ const stations = [
         url: 'http://91.218.213.49:8000/ur1-mp3'
     },
     {
+       name: 'Maria',
+       url: 'http://91.203.4.121:8000/stream64',
+    },
+    {
         name: 'NV',
         url: 'https://online-radio.nv.ua/radionv.mp3'
     },
@@ -122,6 +126,9 @@ const requestHandler = async (request, response) => {
             setTimeout(()=>{
                 halt();
             },1);
+            break;
+        }
+        case '/exit': {
             break;
         }
 		default:

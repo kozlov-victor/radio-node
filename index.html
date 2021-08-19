@@ -8,6 +8,9 @@
         * {
             cursor: none;
         }
+        h1 {
+            display: inline-block;
+        }
         .normal {
             background-color: #1ea416;
         }
@@ -45,10 +48,31 @@
     <button class="error" onclick="halt()">stop</button>
     <script>
         window.onerror = function(e){
-            alert(e);
+            //alert(e);
         }
     </script>
     <script>
+
+        // const listenToBodyClick = (cb)=>{
+        //     let clickCnt = 0;
+        //     let lastClickTime = 0;
+        //     window.onclick = (e)=>{
+        //         if (e.target && e.target.id!=='info') return;
+        //         const now = new Date().getTime();
+        //         const delta = now - lastClickTime;
+        //         lastClickTime = now;
+        //         if (lastClickTime===0 || delta<1000) {
+        //             clickCnt++;
+        //         } else clickCnt = 0;
+        //         if (clickCnt===10) {
+        //             clickCnt = 0;
+        //             cb();
+        //         }
+        //     };
+        // }
+        // listenToBodyClick(()=>{
+        //     fetch('exit');
+        // });
 
         const currentStation = ()=>{
             fetch('currentStation').
@@ -59,7 +83,7 @@
         };
         currentStation();
         focus();
-        
+
         const nextStation = ()=>{
             const nextStationBtn = document.getElementById('nextStationBtn');
             nextStationBtn.setAttribute('disabled','disabled');
@@ -72,12 +96,16 @@
                     console.log(it);
                     document.getElementById('info').innerHTML = it;
                 }).
-                catch(it=>alert(it));
+                catch(it=>{
+                    //alert(it)
+                });
         }
         const halt = ()=>{
             fetch('halt').
                 then(it=>it.text()).
-                catch(it=>alert(it));
+                catch(it=>{
+                    //alert(it)
+                });
         }
     </script>
 </body>
