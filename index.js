@@ -44,18 +44,18 @@ const stations = [
        name: 'Maria',
        url: 'http://91.203.4.121:8000/stream64',
     },
-    {
-        name: 'NV',
-        url: 'https://online-radio.nv.ua/radionv.mp3'
-    },
-    {
-        name: 'JAM',
-        url: 'https://cast.radiogroup.com.ua/jamfm'
-    },
-    {
-        name: 'Krajina',
-        url: 'http://live.radioec.com.ua:8000/kiev'
-    }
+    // {
+    //     name: 'NV',
+    //     url: 'https://online-radio.nv.ua/radionv.mp3'
+    // },
+    // {
+    //     name: 'JAM',
+    //     url: 'https://cast.radiogroup.com.ua/jamfm'
+    // },
+    // {
+    //     name: 'Krajina',
+    //     url: 'http://live.radioec.com.ua:8000/kiev'
+    // }
 ];
 
 let currentStationIndex = 0;
