@@ -2,16 +2,16 @@ download imager https://www.raspberrypi.org/software/
 create file ssh
 https://www.advanced-ip-scanner.com/ru/
 
-sudo raspi-config
+wpa_supplicant.conf
+country=us
+update_config=1
+ctrl_interface=/var/run/wpa_supplicant
+
 network={
- ssid="TP-LINK_D696CE"
- psk="Oracledb_11"
- key_mgmt=WPA-PSK
+ scan_ssid=1
+ ssid="Lanet_200"
+ psk="Oracle_db12"
 }
-
-L200
-0968236492
-
 
 raspberrypi.local
 
