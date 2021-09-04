@@ -2,7 +2,7 @@ download imager https://www.raspberrypi.org/software/
 create file ssh
 https://www.advanced-ip-scanner.com/ru/
 
-wpa_supplicant.conf
+wpa_supplicant.conf (/etc/wpa_supplicant/wpa_supplicant.conf)
 country=us
 update_config=1
 ctrl_interface=/var/run/wpa_supplicant
@@ -15,7 +15,6 @@ network={
 
 raspberrypi.local
 
-sudo reboot
 
 crontab -e
  and use nano
@@ -28,7 +27,6 @@ sudo apt-get install unclutter
 nano /home/pi/.config/lxsession/LXDE-pi/autostart
 unclutter -idle 0.5 -root
 chromium-browser --disable-features=AudioServiceOutOfProcess --kiosk http://localhost:3000/index.html
-
 
 sudo nano /etc/xdg/lxsession/LXDE-pi/autostart
 chromium-browser --disable-features=AudioServiceOutOfProcess --kiosk http://localhost:3000/index.html
