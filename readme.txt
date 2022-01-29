@@ -15,13 +15,21 @@ network={
 
 raspberrypi.local
 
+HUAWEI-N1AV0F
+WDElements5355
+
+
 
 crontab -e
  and use nano
-@reboot node /home/pi/radio/index.js >> /home/pi/radio/out.txt 2>&1
+@reboot node /home/pi/radio-node/index.js >> /home/pi/radio-node/out.txt 2>&1
 
 http://www.lcdwiki.com/3.5inch_RPi_Display
 
+sudo apt-get update
+sudo apt-get upgrade
+sudo apt-get install nodejs
+sudo apt-get install npm
 sudo apt-get install unclutter
 
 nano /home/pi/.config/lxsession/LXDE-pi/autostart
@@ -30,6 +38,12 @@ chromium-browser --disable-features=AudioServiceOutOfProcess --kiosk http://loca
 
 sudo nano /etc/xdg/lxsession/LXDE-pi/autostart
 chromium-browser --disable-features=AudioServiceOutOfProcess --kiosk http://localhost:3000/index.html
+
+
+
+
+How do I stop the audio message "To install the screen reader press control alt space"?
+sudo rm /etc/xdg/autostart/piwiz.desktop
 
 
 
